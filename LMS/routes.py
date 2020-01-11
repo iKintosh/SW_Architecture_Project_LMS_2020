@@ -1,4 +1,4 @@
-from flask import flash, redirect, request
+from flask import flash, redirect, request, url_for
 
 from LMS import app
 
@@ -24,4 +24,11 @@ def index():
 def login():
     name = request.form.get('name')
     password = request.form.get('password')
-    return f"Hello, {name}!\nYour pass is {password}"
+    return redirect(url_for('login2'), code=302)
+
+
+@app.route('/login2', methods=['GET', 'POST'])
+def login2():
+    username = request.form.get('username')
+    password = request.form.get('password')
+    return f"login2 func {username}"

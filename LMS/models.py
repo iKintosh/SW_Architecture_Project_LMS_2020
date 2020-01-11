@@ -1,13 +1,16 @@
 from LMS import db
+from flask_login import UserMixin
+from LMS import login
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     family_name = db.Column(db.String)
     status = db.Column(db.String)
     verification_code = db.Column(db.String)
     email = db.Column(db.String)
+    password_hash = db.Column(db.String)
     phone = db.Column(db.String)
 
     def __repr__(self):
@@ -77,3 +80,8 @@ class Answer(db.Model):
 
     def __repr__(self):
         return f"<Answer(answer={self.answer}, submit_date={self.submit_date})>"
+
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
