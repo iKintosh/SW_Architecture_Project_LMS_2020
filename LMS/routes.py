@@ -17,7 +17,9 @@ class LoginForm(FlaskForm):
 @app.route('/')
 @app.route('/index')
 def index():
-    return "<h1>Hello, World!</h1>"
+    return "<h1>Как они только находят телефоны?!</h1>" \
+           '<iframe width="560" height="315" src="https://www.youtube.com/embed/Rqr9tfEAioM" frameborder="0" ' \
+           'allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
 
 
 @app.route('/login', methods=['GET', 'POST'])

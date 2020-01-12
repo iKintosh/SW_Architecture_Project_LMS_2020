@@ -5,13 +5,25 @@ from LMS import login
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+
     name = db.Column(db.String)
     family_name = db.Column(db.String)
-    status = db.Column(db.String)
+    middle_name = db.Column(db.String)
+
+    is_tutor = db.Column(db.Boolean)
+    is_moderator = db.Column(db.Boolean)
+
     verification_code = db.Column(db.String)
     email = db.Column(db.String)
     password_hash = db.Column(db.String)
+
     phone = db.Column(db.String)
+    city = db.Column(db.String)
+    about_me = db.Column(db.String)
+    vk_link = db.Column(db.String)
+    facebook_link = db.Column(db.String)
+    linkedin_link = db.Column(db.String)
+    instagram_link = db.Column(db.String)
 
     def __repr__(self):
         return f"<User(name={self.name}, family_name={self.family_name}, status={self.status}," \
@@ -25,27 +37,37 @@ class Group(db.Model):
     students = db.relationship('Student', backref='group', lazy='dynamic')
 
     def __repr__(self):
-        return f"<User(num={self.num}, degree={self.degree}, grade={self.grade})>"
+        return f"<Group(num={self.num}, degree={self.degree}, grade={self.grade})>"
+
+
+class Tutor(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), primary_key=True)
+
+
+class Moderator(db.Model):
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), primary_key=True)
 
 
 class Student(db.Model):
-    id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    group_num = db.Column(db.Integer, db.ForeignKey('group.num'))
-    pay_flg = db.Column(db.Boolean)
-
-    def __repr__(self):
-        return "<User(name='%s', group_number='%d')>" % (User.name, self.group_num)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    group_num = db.Column(db.Integer, db.ForeignKey('group.num'), primary_key=True)
+    entry_year = db.Column(db.Integer)
+    is_pay = db.Column(db.Boolean)
 
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String)
+    tutors = db.relationship('Tutor', backref='course', lazy='dynamic')
+    moderators = db.relationship('Moderator', backref='course', lazy='dynamic')
     materials = db.relationship('Material', backref='course', lazy='dynamic')
     homeworks = db.relationship('Homework', backref='course', lazy='dynamic')
 
     def __repr__(self):
-        return f"<User(name={self.name}, description={self.description})>"
+        return f"<Course(name={self.name}, description={self.description})>"
 
 
 class Material(db.Model):
@@ -56,7 +78,7 @@ class Material(db.Model):
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
 
     def __repr__(self):
-        return "<User(name='%s', name='%s', 'text'='%s')>" % (
+        return "<Material(name='%s', name='%s', 'text'='%s')>" % (
             self.name, self.name, self.text)
 
 
@@ -67,6 +89,7 @@ class Homework(db.Model):
     valid_to = db.Column(db.DateTime)
     description = db.Column(db.String)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    answers = db.relationship('Answer', backref='homework', lazy='dynamic')
 
     def __repr__(self):
         return f"<Homework(name={self.name}, valid_from={self.valid_from}, valid_to={self.valid_to}," \
@@ -75,6 +98,8 @@ class Homework(db.Model):
 
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    homework_id = db.Column(db.Integer, db.ForeignKey('homework.id'))
     answer = db.Column(db.String)
     submit_date = db.Column(db.DateTime)
 
