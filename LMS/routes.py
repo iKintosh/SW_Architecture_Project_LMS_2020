@@ -1,36 +1,47 @@
 from flask import flash, redirect, request, url_for
+from flask_login import current_user, login_user, logout_user
+from werkzeug.urls import url_parse
+
+from LMS.models import User
 
 from LMS import app
 
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired
-
-
-class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
-
 
 @app.route('/')
-@app.route('/index')
-def index():
-    return "<h1>Как они только находят телефоны?!</h1>" \
-           '<iframe width="560" height="315" src="https://www.youtube.com/embed/Rqr9tfEAioM" frameborder="0" ' \
-           'allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+def start_page():
+    pass
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    name = request.form.get('name')
-    password = request.form.get('password')
-    return redirect(url_for('login2'), code=302)
+    if current_user.is_authenticated:
+        return redirect(url_for('start_page'))
+    user = User.query.filter_by(email=request.form.get('email'))
+    if user is None or not user.check_password(request.form.get('password')):
+        flash('Invalid username or password')
+    login_user(user, remember=True)
+    next_page = request.args.get('next')
+    if not next_page or url_parse(next_page).netloc != '':
+        next_page = url_for('index')
+    return redirect(next_page)
 
 
-@app.route('/login2', methods=['GET', 'POST'])
-def login2():
-    username = request.form.get('username')
-    password = request.form.get('password')
-    return f"login2 func {username}"
+@app.route('/invite', methods=['GET', 'POST'])
+def invite():
+    if current_user.is_authenticated:
+        return redirect(url_for('start_page'))
+    user = User.query.filter_by(verification_code=request.form.get('verification_code'))
+    if user is None or user.is_registered is True:
+        flash('Invalid username or password')
+    user
+    db.session.add(user)
+    db.session.commit()
+    flash('Congratulations, you are now a registered user!')
+    return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))

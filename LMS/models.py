@@ -1,6 +1,7 @@
 from LMS import db
 from flask_login import UserMixin
 from LMS import login
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(UserMixin, db.Model):
@@ -14,6 +15,7 @@ class User(UserMixin, db.Model):
     is_moderator = db.Column(db.Boolean)
 
     verification_code = db.Column(db.String)
+    is_registered = db.Column(db.Boolean, default=False)
     email = db.Column(db.String)
     password_hash = db.Column(db.String)
 
@@ -28,6 +30,12 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f"<User(name={self.name}, family_name={self.family_name}, status={self.status}," \
                f"email={self.email}, phone={self.phone})>"
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
 class Group(db.Model):
