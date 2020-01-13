@@ -11,7 +11,7 @@ class User(UserMixin, db.Model):
 
     name = db.Column(db.String, nullable=False)
     family_name = db.Column(db.String, nullable=False)
-    middle_name = db.Column(db.String, nullable=False)
+    middle_name = db.Column(db.String)
 
     is_tutor = db.Column(db.Boolean)
     is_moderator = db.Column(db.Boolean)
@@ -99,14 +99,14 @@ class User(UserMixin, db.Model):
             raise ValueError('Link format is wrong. Use https://www.instagram.com/ format')
 
     def __repr__(self):
-        return f"<User(name={self.name}, family_name={self.family_name}, status={self.status}," \
+        return f"<User(name={self.name}, family_name={self.family_name}," \
                f"email={self.email}, phone={self.phone})>"
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        return check_password_hash(self.__password_hash, password)
 
 
 class Group(db.Model):
@@ -132,7 +132,7 @@ class Moderator(db.Model):
 class Student(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     group_num = db.Column(db.Integer, db.ForeignKey('group.num'), primary_key=True)
-    entry_year = db.Column(db.Integer)
+    entry_year = db.Column(db.Integer, nullable=False)
     is_pay = db.Column(db.Boolean)
 
 
@@ -147,6 +147,10 @@ class Course(db.Model):
 
     def __repr__(self):
         return f"<Course(name={self.name}, description={self.description})>"
+
+
+'''class Schedule(db.Model):
+    course_id ='''
 
 
 class Material(db.Model):
