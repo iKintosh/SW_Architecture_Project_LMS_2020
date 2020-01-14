@@ -54,7 +54,7 @@ class User(UserMixin, db.Model):
 
     @vk_link.setter
     def vk_link(self, value):
-        if value.startwith('https://vk.com/'):
+        if value.startswith('https://vk.com/'):
             self.__vk_link = value
         else:
             raise ValueError('Link format is wrong. Use https://vk.com/ format')
@@ -67,7 +67,7 @@ class User(UserMixin, db.Model):
 
     @facebook_link.setter
     def facebook_link(self, value):
-        if value.startwith('https://facebook.com/'):
+        if value.startswith('https://facebook.com/'):
             self.__facebook_link = value
         else:
             raise ValueError('Link format is wrong. Use https://facebook.com/ format')
@@ -80,7 +80,7 @@ class User(UserMixin, db.Model):
 
     @linkedin_link.setter
     def linkedin_link(self, value):
-        if value.startwith('https://linkedin.com/'):
+        if value.startswith('https://linkedin.com/'):
             self.__linkedin_link = value
         else:
             raise ValueError('Link format is wrong. Use https://linkedin.com/ format')
@@ -93,7 +93,7 @@ class User(UserMixin, db.Model):
 
     @instagram_link.setter
     def instagram_link(self, value):
-        if value.startwith('https://www.instagram.com/'):
+        if value.startswith('https://www.instagram.com/'):
             self.__instagram_link = value
         else:
             raise ValueError('Link format is wrong. Use https://www.instagram.com/ format')
@@ -149,8 +149,9 @@ class Course(db.Model):
         return f"<Course(name={self.name}, description={self.description})>"
 
 
-'''class Schedule(db.Model):
-    course_id ='''
+class Curriculum(db.Model):
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), primary_key=True)
+    group_num = db.Column(db.Integer, db.ForeignKey('group.num'), primary_key=True)
 
 
 class Material(db.Model):
