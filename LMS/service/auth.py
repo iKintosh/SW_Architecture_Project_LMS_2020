@@ -10,6 +10,7 @@ def signup(verification_code, email, password):
         raise ValueError('User does not exists or already registered')
     user.email = email
     user.password_hash = password
+    user.is_registered = True
     db.session.add(user)
     db.session.commit()
     u_id = user.id

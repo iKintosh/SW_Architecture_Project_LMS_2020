@@ -21,12 +21,15 @@ class User(db.Model):
     __password_hash = db.Column(db.String)
 
     @property
-    def password_hash(self):
+    def password(self):
         return self.__password_hash
 
-    @password_hash.setter
-    def password_hash(self, password):
-        self.__password_hash = hash(password)
+    @password.setter
+    def password(self, password):
+        self.__password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.__password_hash, password)
 
     __phone = db.Column(db.String)
 
@@ -99,12 +102,6 @@ class User(db.Model):
     def __repr__(self):
         return f"<User(name={self.name}, family_name={self.family_name}," \
                f"email={self.email}, phone={self.phone})>"
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.__password_hash, password)
 
 
 class Group(db.Model):

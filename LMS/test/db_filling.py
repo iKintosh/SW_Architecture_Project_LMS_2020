@@ -1,11 +1,10 @@
 from LMS import db
 from flask_login import UserMixin
-from LMS import login
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from LMS.models import *
+from LMS.model.models import *
 
 engine = create_engine('postgresql://postgres:@192.168.99.100:54320/postgres', echo=True)
 Session = sessionmaker(bind=engine)
@@ -17,12 +16,12 @@ session = Session()
 group191 = Group(num=191, degree='Bachelor', grade=1)
 group281 = Group(num=281, degree='Master', grade=2)
 
-john = User(id=1, name='John', family_name='Smith', verification_code='john12')
-alice = User(id=2, name='Alice', family_name='Turner', verification_code='alice12', email='alice_turner@lms.ru', \
-             password_hash='AliceTurner1212', middle_name='Sergeevna')
+john = User(id=1, name='John', family_name='Smith', verification_code='john12', is_registered=False)
+alice = User(id=2, name='Alice', family_name='Turner', verification_code='alice12', email='alice_turner@lms.ru',
+             password='AliceTurner1212', middle_name='Sergeevna', is_registered=True)
 ann = User(id=3, name='Ann', family_name='Wells', middle_name='Sara', verification_code='ann12',
-           email='ann_s_wells@LMS.ru', \
-           password_hash='AnnWells1212', facebook_link='https://facebook.com/annawells')
+           email='ann_s_wells@LMS.ru',
+           password='AnnWells1212', facebook_link='https://facebook.com/annawells', is_registered=True)
 session.add_all([group191, group281, john, alice, ann])
 
 student_john = Student(user_id=john.id, group_num=group191.num, entry_year=2019, is_pay=1)
