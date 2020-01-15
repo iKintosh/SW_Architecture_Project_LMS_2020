@@ -9,7 +9,7 @@ SignupItem.add_argument('verification_code', type=str, help='verification code p
 SignupItem.add_argument('email', type=str, help='Your email', required=True)
 SignupItem.add_argument('password', type=str, help='Your password; make sure it is at least 6 symbols', required=True)
 
-user_id = api.model('NewUser', {
+user_id = api.model('User', {
     'id': fields.Integer
 })
 
