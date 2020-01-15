@@ -22,7 +22,7 @@ class SignupApi(Resource):
     def post(self):
         args = SignupItem.parse_args()
         try:
-            auth.signup(**args)
+            new_user_id = auth.signup(**args)
         except ValueError as e:
             abort(HTTPStatus.BAD_REQUEST, message=str(e))
-        return {'id': 12}, HTTPStatus.CREATED
+        return {'id': new_user_id}, HTTPStatus.CREATED
