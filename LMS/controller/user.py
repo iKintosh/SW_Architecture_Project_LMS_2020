@@ -33,8 +33,21 @@ class UserAPI(Resource):
     @api.doc('Get profile')
     @api.expect(AuthHeader)
     @api.response(HTTPStatus.UNAUTHORIZED, 'Auth error')
-    # @api.marshal_with(user_id, code=HTTPStatus.OK, description='List of groupmates')
+    @api.marshal_with(user_id, code=HTTPStatus.OK, description='Get profile')
     def get(self, id):
         u_id = get_jwt_identity()
         profile = user_services.get_profile(id, u_id)
-        return {}, 200
+        return profile, HTTPStatus.OK
+
+
+'''@api.route('/<user>/<courses>')
+class UserCoursesApi(Resource):
+    @jwt_required
+    @api.doc('Get my courses list')
+    @api.expect(AuthHeader)
+    @api.response(HTTPStatus.UNAUTHORIZED, 'Auth error')
+    @api.marshal_with(user_id, code=HTTPStatus.OK, description='Get my courses list')
+    def get(self):
+        u_id = get_jwt_identity()
+        courses = user_services.get_my_courses(u_id)
+        return courses, HTTPStatus.OK'''
