@@ -21,7 +21,7 @@ Now create .env file in Tink2020_LMS:
 DATABASE_URL=postgresql://postgres:@<URL_TO_DATABASE>:54320/postgres
 FLASK_DEBUG=0
 FLASK_APP=run.py
-JWT_SECRET_KEY='t1NP63m4wnBg6nyHYKfmc2TpCOGI4nss'
+JWT_SECRET_KEY=<SECRET KEY>
 ```
 URL_TO_DATABASE is usually ```localhost```
 
