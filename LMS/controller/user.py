@@ -33,7 +33,7 @@ class UserAPI(Resource):
     @api.doc('Get profile')
     @api.expect(AuthHeader)
     @api.response(HTTPStatus.UNAUTHORIZED, 'Auth error')
-    @api.marshal_with(user_id, code=HTTPStatus.OK, description='Get profile')
+    @api.response(HTTPStatus.OK, 'Profile info')
     def get(self, id):
         u_id = get_jwt_identity()
         profile = user_services.get_profile(id, u_id)
