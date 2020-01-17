@@ -20,26 +20,26 @@ def upgrade():
     op.create_table('moderator',
                     sa.Column('user_id', sa.Integer(), nullable=False),
                     sa.Column('course_id', sa.Integer(), nullable=False),
-                    sa.ForeignKeyConstraint(['course_id'], ['course.url_id'], ),
-                    sa.ForeignKeyConstraint(['user_id'], ['user.url_id'], ),
+                    sa.ForeignKeyConstraint(['course_id'], ['course.id'], ),
+                    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
                     sa.PrimaryKeyConstraint('user_id', 'course_id')
                     )
     op.create_table('tutor',
                     sa.Column('user_id', sa.Integer(), nullable=False),
                     sa.Column('course_id', sa.Integer(), nullable=False),
-                    sa.ForeignKeyConstraint(['course_id'], ['course.url_id'], ),
-                    sa.ForeignKeyConstraint(['user_id'], ['user.url_id'], ),
+                    sa.ForeignKeyConstraint(['course_id'], ['course.id'], ),
+                    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
                     sa.PrimaryKeyConstraint('user_id', 'course_id')
                     )
     op.add_column('answer', sa.Column('homework_id', sa.Integer(), nullable=True))
     op.add_column('answer', sa.Column('user_id', sa.Integer(), nullable=True))
-    op.create_foreign_key(None, 'answer', 'user', ['user_id'], ['url_id'])
-    op.create_foreign_key(None, 'answer', 'homework', ['homework_id'], ['url_id'])
+    op.create_foreign_key(None, 'answer', 'user', ['user_id'], ['id'])
+    op.create_foreign_key(None, 'answer', 'homework', ['homework_id'], ['id'])
     op.add_column('student', sa.Column('entry_year', sa.Integer(), nullable=True))
     op.add_column('student', sa.Column('user_id', sa.Integer(), nullable=False))
     op.drop_constraint('student_id_fkey', 'student', type_='foreignkey')
-    op.create_foreign_key(None, 'student', 'user', ['user_id'], ['url_id'])
-    op.drop_column('student', 'url_id')
+    op.create_foreign_key(None, 'student', 'user', ['user_id'], ['id'])
+    op.drop_column('student', 'id')
     op.add_column('user', sa.Column('about_me', sa.String(), nullable=True))
     op.add_column('user', sa.Column('city', sa.String(), nullable=True))
     op.add_column('user', sa.Column('facebook_link', sa.String(), nullable=True))
@@ -67,9 +67,9 @@ def downgrade():
     op.drop_column('user', 'facebook_link')
     op.drop_column('user', 'city')
     op.drop_column('user', 'about_me')
-    op.add_column('student', sa.Column('url_id', sa.INTEGER(), autoincrement=False, nullable=False))
+    op.add_column('student', sa.Column('id', sa.INTEGER(), autoincrement=False, nullable=False))
     op.drop_constraint(None, 'student', type_='foreignkey')
-    op.create_foreign_key('student_id_fkey', 'student', 'user', ['url_id'], ['url_id'])
+    op.create_foreign_key('student_id_fkey', 'student', 'user', ['id'], ['id'])
     op.drop_column('student', 'user_id')
     op.drop_column('student', 'entry_year')
     op.drop_constraint(None, 'answer', type_='foreignkey')
