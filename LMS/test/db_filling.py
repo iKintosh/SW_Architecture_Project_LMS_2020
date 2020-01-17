@@ -1,3 +1,5 @@
+# skipcq
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from LMS.model.models import Group, User, Student, Course, Tutor
