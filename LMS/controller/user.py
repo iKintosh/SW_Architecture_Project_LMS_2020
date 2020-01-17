@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from flask_restplus import Namespace, Resource, fields
+from flask_restplus import Namespace, Resource
 
 from LMS.service import user_services
 from LMS.controller.signup import user_id

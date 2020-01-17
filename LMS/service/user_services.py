@@ -1,5 +1,3 @@
-from werkzeug.security import check_password_hash
-
 from LMS.model.models import User, Group, Student, Course, Curriculum, Tutor
 
 
@@ -19,8 +17,8 @@ def get_profile(id, u_id):
     user = User.query.filter_by(id=id).first()
     student = Student.query.filter_by(user_id=id).first()
     group = Group.query.filter_by(num=student.group_num).first()
-    profile = {'full name': (user.name + ' ' + user.middle_name + ' ' + user.family_name), 'e-mail': user.email, \
-               'phone number': user.phone, 'home city': user.city, 'about me': user.about_me, 'vk': user.vk_link, \
+    profile = {'full name': (user.name + ' ' + user.middle_name + ' ' + user.family_name), 'e-mail': user.email,
+               'phone number': user.phone, 'home city': user.city, 'about me': user.about_me, 'vk': user.vk_link,
                'instagram': user.instagram_link, 'facebook': user.facebook_link, 'LinkedIn': user.linkedin_link}
     if student.user_id is not None:
         profile.update({'status': 'student', 'group': student.group_num, 'degree': group.degree, 'grade': group.grade})
