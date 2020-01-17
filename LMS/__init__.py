@@ -1,9 +1,15 @@
 from flask import Flask
-from config import Config
-from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 from flask_restplus import Api
-from flask_jwt_extended import JWTManager
+from flask_sqlalchemy import SQLAlchemy
+
+from config import Config
+from LMS.controller import routes
+from LMS.controller.login import api as login_ns
+from LMS.controller.signup import API as signup_ns
+from LMS.controller.user import API as user_ns
+from LMS.model import models
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -12,13 +18,6 @@ migrate = Migrate(app, db)
 jwt = JWTManager(app)
 api = Api(app)
 
-from LMS.controller.user import API as user_ns
-from LMS.controller.signup import API as signup_ns
-from LMS.controller.login import api as login_ns
-
-api.add_namespace(user_ns, path='/user')
-api.add_namespace(signup_ns, path='/signup')
-api.add_namespace(login_ns, path='/login')
-
-from LMS.controller import routes
-from LMS.model import models
+api.add_namespace(user_ns, path="/user")
+api.add_namespace(signup_ns, path="/signup")
+api.add_namespace(login_ns, path="/login")
