@@ -58,7 +58,8 @@ class User(db.Model):
         if value.startswith('https://vk.com/'):
             self.__vk_link = value
         else:
-            raise ValueError('Link format is wrong. Use https://vk.com/ format')
+            raise ValueError(
+                'Link format is wrong. Use https://vk.com/ format')
 
     __facebook_link = db.Column(db.String)
 
@@ -71,7 +72,8 @@ class User(db.Model):
         if value.startswith('https://facebook.com/'):
             self.__facebook_link = value
         else:
-            raise ValueError('Link format is wrong. Use https://facebook.com/ format')
+            raise ValueError(
+                'Link format is wrong. Use https://facebook.com/ format')
 
     __linkedin_link = db.Column(db.String)
 
@@ -84,7 +86,8 @@ class User(db.Model):
         if value.startswith('https://linkedin.com/'):
             self.__linkedin_link = value
         else:
-            raise ValueError('Link format is wrong. Use https://linkedin.com/ format')
+            raise ValueError(
+                'Link format is wrong. Use https://linkedin.com/ format')
 
     __instagram_link = db.Column(db.String)
 
@@ -97,7 +100,8 @@ class User(db.Model):
         if value.startswith('https://www.instagram.com/'):
             self.__instagram_link = value
         else:
-            raise ValueError('Link format is wrong. Use https://www.instagram.com/ format')
+            raise ValueError(
+                'Link format is wrong. Use https://www.instagram.com/ format')
 
     def __repr__(self):
         return f"<User(name={self.name}, family_name={self.family_name}," \
@@ -115,18 +119,24 @@ class Group(db.Model):
 
 
 class Tutor(db.Model):
-    user_id = db.Column(db.Integer, db.ForeignKey('user.url_id'), primary_key=True)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.url_id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        'user.url_id'), primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey(
+        'course.url_id'), primary_key=True)
 
 
 class Moderator(db.Model):
-    user_id = db.Column(db.Integer, db.ForeignKey('user.url_id'), primary_key=True)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.url_id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        'user.url_id'), primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey(
+        'course.url_id'), primary_key=True)
 
 
 class Student(db.Model):
-    user_id = db.Column(db.Integer, db.ForeignKey('user.url_id'), primary_key=True)
-    group_num = db.Column(db.Integer, db.ForeignKey('group.num'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        'user.url_id'), primary_key=True)
+    group_num = db.Column(db.Integer, db.ForeignKey(
+        'group.num'), primary_key=True)
     entry_year = db.Column(db.Integer, nullable=False)
     is_pay = db.Column(db.Boolean)
 
@@ -145,8 +155,10 @@ class Course(db.Model):
 
 
 class Curriculum(db.Model):
-    course_id = db.Column(db.Integer, db.ForeignKey('course.url_id'), primary_key=True)
-    group_num = db.Column(db.Integer, db.ForeignKey('group.num'), primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey(
+        'course.url_id'), primary_key=True)
+    group_num = db.Column(db.Integer, db.ForeignKey(
+        'group.num'), primary_key=True)
 
 
 class Material(db.Model):

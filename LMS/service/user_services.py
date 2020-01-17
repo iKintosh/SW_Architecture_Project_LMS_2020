@@ -3,7 +3,8 @@ from LMS.model.models import User, Group, Student, Course, Curriculum, Tutor
 
 def get_groupmates(u_id):
     """get list of groupmates id"""
-    user = User.query.join(Student).filter(User.id == u_id).add_columns(Student.group_num).first()
+    user = User.query.join(Student).filter(
+        User.id == u_id).add_columns(Student.group_num).first()
     group_num = user.group_num
     students = Group.query.filter_by(num=group_num).first().students.all()
     students_id = []
@@ -21,7 +22,8 @@ def get_profile(request_id, u_id):
                'phone number': user.phone, 'home city': user.city, 'about me': user.about_me, 'vk': user.vk_link,
                'instagram': user.instagram_link, 'facebook': user.facebook_link, 'LinkedIn': user.linkedin_link}
     if student.user_id is not None:
-        profile.update({'status': 'student', 'group': student.group_num, 'degree': group.degree, 'grade': group.grade})
+        profile.update({'status': 'student', 'group': student.group_num,
+                        'degree': group.degree, 'grade': group.grade})
         if request_id == u_id:
             profile.update({'pay uni': student.is_pay})
     else:
@@ -55,6 +57,6 @@ def change_password(u_id, old_password, new_password):
 def get_course(c_id):
     """get course info"""
     course = Course.query.filter_by(id=c_id)
-    c_profile = {'name': course.name, 'description': course.description, 'tutors': course.tutors, \
+    c_profile = {'name': course.name, 'description': course.description, 'tutors': course.tutors,
                  'moderators': course.moderators, 'materials': course.materials, 'homeworks': course.homeworks}
     return c_profile

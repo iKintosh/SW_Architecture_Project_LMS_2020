@@ -5,9 +5,11 @@ from LMS.service import auth
 api = Namespace('signup', description='sign up')
 
 SignupItem = api.parser()
-SignupItem.add_argument('verification_code', type=str, help='verification code provided by admin', required=True)
+SignupItem.add_argument('verification_code', type=str,
+                        help='verification code provided by admin', required=True)
 SignupItem.add_argument('email', type=str, help='Your email', required=True)
-SignupItem.add_argument('password', type=str, help='Your password; make sure it is at least 6 symbols', required=True)
+SignupItem.add_argument(
+    'password', type=str, help='Your password; make sure it is at least 6 symbols', required=True)
 
 user_id = api.model('User', {
     'url_id': fields.Integer
