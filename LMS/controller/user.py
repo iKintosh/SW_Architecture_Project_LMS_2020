@@ -27,16 +27,16 @@ class UserListAPI(Resource):
         return groupmates, HTTPStatus.OK
 
 
-@api.route('/<int:id>')
+@api.route('/<int:url_id>')
 class UserAPI(Resource):
     @jwt_required
     @api.doc('Get profile')
     @api.expect(AuthHeader)
     @api.response(HTTPStatus.UNAUTHORIZED, 'Auth error')
     @api.response(HTTPStatus.OK, 'Profile info')
-    def get(self, id):
+    def get(self, url_id):
         u_id = get_jwt_identity()
-        profile = user_services.get_profile(id, u_id)
+        profile = user_services.get_profile(url_id, u_id)
         return profile, HTTPStatus.OK
 
 

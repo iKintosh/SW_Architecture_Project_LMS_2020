@@ -115,17 +115,17 @@ class Group(db.Model):
 
 
 class Tutor(db.Model):
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.url_id'), primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.url_id'), primary_key=True)
 
 
 class Moderator(db.Model):
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.url_id'), primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.url_id'), primary_key=True)
 
 
 class Student(db.Model):
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.url_id'), primary_key=True)
     group_num = db.Column(db.Integer, db.ForeignKey('group.num'), primary_key=True)
     entry_year = db.Column(db.Integer, nullable=False)
     is_pay = db.Column(db.Boolean)
@@ -145,7 +145,7 @@ class Course(db.Model):
 
 
 class Curriculum(db.Model):
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.url_id'), primary_key=True)
     group_num = db.Column(db.Integer, db.ForeignKey('group.num'), primary_key=True)
 
 
@@ -154,7 +154,7 @@ class Material(db.Model):
     name = db.Column(db.String)
     text = db.Column(db.String)
     date = db.Column(db.DateTime)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    course_id = db.Column(db.Integer, db.ForeignKey('course.url_id'))
 
     def __repr__(self):
         return "<Material(name='%s', name='%s', 'text'='%s')>" % (
@@ -167,7 +167,7 @@ class Homework(db.Model):
     valid_from = db.Column(db.DateTime)
     valid_to = db.Column(db.DateTime)
     description = db.Column(db.String)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    course_id = db.Column(db.Integer, db.ForeignKey('course.url_id'))
     answers = db.relationship('Answer', backref='homework', lazy='dynamic')
 
     def __repr__(self):
@@ -177,8 +177,8 @@ class Homework(db.Model):
 
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    homework_id = db.Column(db.Integer, db.ForeignKey('homework.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.url_id'))
+    homework_id = db.Column(db.Integer, db.ForeignKey('homework.url_id'))
     answer = db.Column(db.String)
     submit_date = db.Column(db.DateTime)
 

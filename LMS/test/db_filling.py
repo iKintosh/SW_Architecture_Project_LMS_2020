@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from LMS.model.models import *
+from LMS.model.models import Group, User, Student, Course, Tutor
 
 engine = create_engine('postgresql://postgres:@192.168.99.100:54320/postgres', echo=True)
 Session = sessionmaker(bind=engine)

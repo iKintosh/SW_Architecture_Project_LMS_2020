@@ -10,7 +10,7 @@ SignupItem.add_argument('email', type=str, help='Your email', required=True)
 SignupItem.add_argument('password', type=str, help='Your password; make sure it is at least 6 symbols', required=True)
 
 user_id = api.model('User', {
-    'id': fields.Integer
+    'url_id': fields.Integer
 })
 
 
@@ -25,4 +25,4 @@ class SignupApi(Resource):
             new_user_id = auth.signup(**args)
         except ValueError as e:
             abort(HTTPStatus.BAD_REQUEST, message=str(e))
-        return {'id': new_user_id}, HTTPStatus.CREATED
+        return {'url_id': new_user_id}, HTTPStatus.CREATED

@@ -20,7 +20,7 @@ def upgrade():
     op.create_table('curriculum',
                     sa.Column('course_id', sa.Integer(), nullable=False),
                     sa.Column('group_num', sa.Integer(), nullable=False),
-                    sa.ForeignKeyConstraint(['course_id'], ['course.id'], ),
+                    sa.ForeignKeyConstraint(['course_id'], ['course.url_id'], ),
                     sa.ForeignKeyConstraint(['group_num'], ['group.num'], ),
                     sa.PrimaryKeyConstraint('course_id', 'group_num')
                     )
