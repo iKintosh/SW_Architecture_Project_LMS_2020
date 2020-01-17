@@ -1,14 +1,15 @@
-from LMS.model import models
+from flask import Flask
+from flask_jwt_extended import JWTManager
+from flask_migrate import Migrate
+from flask_restplus import Api
+from flask_sqlalchemy import SQLAlchemy
+
+from config import Config
 from LMS.controller import routes
 from LMS.controller.login import api as login_ns
 from LMS.controller.signup import API as signup_ns
 from LMS.controller.user import API as user_ns
-from flask import Flask
-from config import Config
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_restplus import Api
-from flask_jwt_extended import JWTManager
+from LMS.model import models
 
 app = Flask(__name__)
 app.config.from_object(Config)
