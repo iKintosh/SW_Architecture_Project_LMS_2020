@@ -1,3 +1,8 @@
+from LMS.model import models
+from LMS.controller import routes
+from LMS.controller.login import api as login_ns
+from LMS.controller.signup import API as signup_ns
+from LMS.controller.user import API as user_ns
 from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
@@ -12,13 +17,7 @@ migrate = Migrate(app, db)
 jwt = JWTManager(app)
 api = Api(app)
 
-from LMS.controller.user import API as user_ns
-from LMS.controller.signup import API as signup_ns
-from LMS.controller.login import api as login_ns
 
 api.add_namespace(user_ns, path='/user')
 api.add_namespace(signup_ns, path='/signup')
 api.add_namespace(login_ns, path='/login')
-
-from LMS.controller import routes
-from LMS.model import models
