@@ -121,27 +121,21 @@ class Group(db.Model):
 
 
 class Tutor(db.Model):
-    user_id = db.Column(db.Integer,
-                        db.ForeignKey("user.id"),
-                        primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
     course_id = db.Column(db.Integer,
                           db.ForeignKey("course.id"),
                           primary_key=True)
 
 
 class Moderator(db.Model):
-    user_id = db.Column(db.Integer,
-                        db.ForeignKey("user.id"),
-                        primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
     course_id = db.Column(db.Integer,
                           db.ForeignKey("course.id"),
                           primary_key=True)
 
 
 class Student(db.Model):
-    user_id = db.Column(db.Integer,
-                        db.ForeignKey("user.id"),
-                        primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
     group_num = db.Column(db.Integer,
                           db.ForeignKey("group.num"),
                           primary_key=True)
