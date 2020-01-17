@@ -8,9 +8,8 @@ from LMS.model.models import Student
 from LMS.model.models import Tutor
 from LMS.model.models import User
 
-engine = create_engine(
-    "postgresql://postgres:@192.168.99.100:54320/postgres", echo=True
-)
+engine = create_engine("postgresql://postgres:@192.168.99.100:54320/postgres",
+                       echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 
@@ -50,12 +49,14 @@ ann = User(
 )
 session.add_all([group191, group281, john, alice, ann])
 
-student_john = Student(
-    user_id=john.id, group_num=group191.num, entry_year=2019, is_pay=1
-)
-student_alice = Student(
-    user_id=alice.id, group_num=group191.num, entry_year=2019, is_pay=0
-)
+student_john = Student(user_id=john.id,
+                       group_num=group191.num,
+                       entry_year=2019,
+                       is_pay=1)
+student_alice = Student(user_id=alice.id,
+                        group_num=group191.num,
+                        entry_year=2019,
+                        is_pay=0)
 
 math_course = Course(
     id=1,
@@ -72,7 +73,8 @@ philosophy_course = Course(id=2, name="Philosophy and history of science")
 
 tutor_ann = Tutor(user_id=ann.id, course_id=philosophy_course.id)
 
-session.add_all(
-    [student_alice, student_john, tutor_ann, math_course, mem_course, philosophy_course]
-)
+session.add_all([
+    student_alice, student_john, tutor_ann, math_course, mem_course,
+    philosophy_course
+])
 session.commit()
