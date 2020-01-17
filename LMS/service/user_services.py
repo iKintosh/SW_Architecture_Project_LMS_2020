@@ -8,8 +8,12 @@ from LMS.model.models import User
 
 def get_groupmates(u_id):
     """get list of groupmates id"""
-    user = (User.query.join(Student).filter(User.id == u_id).add_columns(
-        Student.group_num).first())
+    user = (
+        User.query.join(Student)
+        .filter(User.id == u_id)
+        .add_columns(Student.group_num)
+        .first()
+    )
     group_num = user.group_num
     students = Group.query.filter_by(num=group_num).first().students.all()
     students_id = []
@@ -24,8 +28,7 @@ def get_profile(request_id, u_id):
     student = Student.query.filter_by(user_id=request_id).first()
     group = Group.query.filter_by(num=student.group_num).first()
     profile = {
-        "full name":
-        (user.name + " " + user.middle_name + " " + user.family_name),
+        "full name": (user.name + " " + user.middle_name + " " + user.family_name),
         "e-mail": user.email,
         "phone number": user.phone,
         "home city": user.city,
@@ -36,12 +39,14 @@ def get_profile(request_id, u_id):
         "LinkedIn": user.linkedin_link,
     }
     if student.user_id is not None:
-        profile.update({
-            "status": "student",
-            "group": student.group_num,
-            "degree": group.degree,
-            "grade": group.grade,
-        })
+        profile.update(
+            {
+                "status": "student",
+                "group": student.group_num,
+                "degree": group.degree,
+                "grade": group.grade,
+            }
+        )
         if request_id == u_id:
             profile.update({"pay uni": student.is_pay})
     else:

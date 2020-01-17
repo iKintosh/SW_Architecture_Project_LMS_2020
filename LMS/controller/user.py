@@ -22,9 +22,9 @@ class UserListAPI(Resource):
     @api.doc("Get list of groupmates")
     @api.expect(AuthHeader)
     @api.response(HTTPStatus.UNAUTHORIZED, "Auth error")
-    @api.marshal_list_with(user_id,
-                           code=HTTPStatus.OK,
-                           description="List of groupmates")
+    @api.marshal_list_with(
+        user_id, code=HTTPStatus.OK, description="List of groupmates"
+    )
     def get(self):
         u_id = get_jwt_identity()
         groupmates = user_services.get_groupmates(u_id)
