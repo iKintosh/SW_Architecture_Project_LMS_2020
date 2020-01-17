@@ -13,8 +13,8 @@ def get_groupmates(u_id):
     group_num = user.group_num
     students = Group.query.filter_by(num=group_num).first().students.all()
     students_id = []
-    for S in students:
-        students_id.append({"url_id": S.user_id})
+    for stdnt in students:
+        students_id.append({"url_id": stdnt.user_id})
     return students_id
 
 
@@ -60,8 +60,8 @@ def get_my_courses(u_id):
         for course in courses:
             courses_ids.append({"course_id": course.id})
     elif tutor is not None:
-        for T in tutor:
-            courses_ids.append({"course_id": T.course_id})
+        for ttr in tutor:
+            courses_ids.append({"course_id": ttr.course_id})
     return courses_ids
 
 

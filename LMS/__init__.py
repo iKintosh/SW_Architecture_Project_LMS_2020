@@ -12,8 +12,8 @@ migrate = Migrate(app, db)
 jwt = JWTManager(app)
 api = Api(app)
 
-from LMS.controller.user import api as user_ns
-from LMS.controller.signup import api as signup_ns
+from LMS.controller.user import API as user_ns
+from LMS.controller.signup import API as signup_ns
 from LMS.controller.login import api as login_ns
 
 api.add_namespace(user_ns, path='/user')
