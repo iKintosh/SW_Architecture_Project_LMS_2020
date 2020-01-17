@@ -1,4 +1,9 @@
-from LMS.model.models import User, Group, Student, Course, Curriculum, Tutor
+from LMS.model.models import Course
+from LMS.model.models import Curriculum
+from LMS.model.models import Group
+from LMS.model.models import Student
+from LMS.model.models import Tutor
+from LMS.model.models import User
 
 
 def get_groupmates(u_id):

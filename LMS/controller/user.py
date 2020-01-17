@@ -1,10 +1,12 @@
 from http import HTTPStatus
 
-from flask_jwt_extended import jwt_required, get_jwt_identity
-from flask_restplus import Namespace, Resource
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_restplus import Namespace
+from flask_restplus import Resource
 
-from LMS.service import user_services
 from LMS.controller.signup import user_id
+from LMS.service import user_services
 
 api = Namespace("user", description="User")
 

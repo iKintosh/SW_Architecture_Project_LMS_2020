@@ -1,5 +1,10 @@
-from flask_restplus import Namespace, Resource, fields, abort
 from http import HTTPStatus
+
+from flask_restplus import abort
+from flask_restplus import fields
+from flask_restplus import Namespace
+from flask_restplus import Resource
+
 from LMS.service import auth
 
 api = Namespace("signup", description="sign up")

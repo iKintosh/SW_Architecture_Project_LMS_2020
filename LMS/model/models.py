@@ -1,5 +1,7 @@
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
+
 from LMS import db
-from werkzeug.security import generate_password_hash, check_password_hash
 
 PHONE_LENGTH = 12
 

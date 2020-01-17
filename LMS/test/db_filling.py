@@ -1,8 +1,12 @@
 # skipcq
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from LMS.model.models import Group, User, Student, Course, Tutor
+
+from LMS.model.models import Course
+from LMS.model.models import Group
+from LMS.model.models import Student
+from LMS.model.models import Tutor
+from LMS.model.models import User
 
 engine = create_engine(
     "postgresql://postgres:@192.168.99.100:54320/postgres", echo=True

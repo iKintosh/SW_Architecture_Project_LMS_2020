@@ -1,5 +1,7 @@
 from LMS import api
-from LMS.controller import signup, login, user
+from LMS.controller import login
+from LMS.controller import signup
+from LMS.controller import user
 
 api.add_resource(signup.SignupApi, "/signup")
 api.add_resource(login.LoginApi, "/login")
