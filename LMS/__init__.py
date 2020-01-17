@@ -18,7 +18,6 @@ migrate = Migrate(app, db)
 jwt = JWTManager(app)
 api = Api(app)
 
-
 api.add_namespace(user_ns, path="/user")
 api.add_namespace(signup_ns, path="/signup")
 api.add_namespace(login_ns, path="/login")

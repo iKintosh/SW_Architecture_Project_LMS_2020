@@ -31,7 +31,9 @@ USER_ID = API.model("User", {"url_id": fields.Integer})
 class SignupApi(Resource):
     @API.expect(SIGNUP_ITEM)
     @API.response(HTTPStatus.BAD_REQUEST, "Validation error")
-    @API.marshal_with(USER_ID, code=HTTPStatus.CREATED, description="User registered")
+    @API.marshal_with(USER_ID,
+                      code=HTTPStatus.CREATED,
+                      description="User registered")
     def post(self):
         args = SIGNUP_ITEM.parse_args()
         try:
