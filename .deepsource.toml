@@ -1,4 +1,9 @@
  version = 1
+ 
+ exclude_patterns = [
+  "migrations/**",
+  "notebooks/**"
+]
 
  [[analyzers]]
  name = "python"
