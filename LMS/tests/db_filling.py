@@ -11,9 +11,8 @@ from LMS import db
 from LMS import login
 from LMS.models import *
 
-engine = create_engine(
-    "postgresql://postgres:@192.168.99.100:54320/postgres", echo=True
-)
+engine = create_engine("postgresql://postgres:@192.168.99.100:54320/postgres",
+                       echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 
@@ -44,12 +43,14 @@ ann = User(
     facebook_link="https://facebook.com/annawells",
 )
 
-student_john = Student(
-    user_id=john.id, group_num=group191.num, entry_year=2019, is_pay=1
-)
-student_alice = Student(
-    user_id=alice.id, group_num=group191.num, entry_year=2019, is_pay=0
-)
+student_john = Student(user_id=john.id,
+                       group_num=group191.num,
+                       entry_year=2019,
+                       is_pay=1)
+student_alice = Student(user_id=alice.id,
+                        group_num=group191.num,
+                        entry_year=2019,
+                        is_pay=0)
 
 math_course = Course(
     id=1,
@@ -119,44 +120,36 @@ alice_answer_philosophy = Answer(
     submit_date=dt.datetime(2019, 12, 2, 18, 1, 00),
 )
 
-group281_x_philosophy = Curriculum(
-    course_id=philosophy_course.id, group_num=group281.num
-)
-group191_x_philosophy = Curriculum(
-    course_id=philosophy_course.id, group_num=group191.num
-)
+group281_x_philosophy = Curriculum(course_id=philosophy_course.id,
+                                   group_num=group281.num)
+group191_x_philosophy = Curriculum(course_id=philosophy_course.id,
+                                   group_num=group191.num)
 group191_x_math = Curriculum(course_id=math_course.id, group_num=group191.num)
 
 session.add_all([group191, group281, john, alice, ann])
 session.commit()
-session.add_all(
-    [
-        student_alice,
-        student_john,
-        tutor_ann,
-        math_course,
-        mem_course,
-        philosophy_course,
-        Kant_philosophy,
-    ]
-)
+session.add_all([
+    student_alice,
+    student_john,
+    tutor_ann,
+    math_course,
+    mem_course,
+    philosophy_course,
+    Kant_philosophy,
+])
 session.commit()
-session.add_all(
-    [
-        Matrix_math,
-        Integral_math,
-        homework1_philosophy,
-        homework_matrix,
-        john_answer_philosophy,
-    ]
-)
+session.add_all([
+    Matrix_math,
+    Integral_math,
+    homework1_philosophy,
+    homework_matrix,
+    john_answer_philosophy,
+])
 session.commit()
-session.add_all(
-    [
-        alice_answer_philosophy,
-        group191_x_math,
-        group191_x_philosophy,
-        group281_x_philosophy,
-    ]
-)
+session.add_all([
+    alice_answer_philosophy,
+    group191_x_math,
+    group191_x_philosophy,
+    group281_x_philosophy,
+])
 session.commit()
