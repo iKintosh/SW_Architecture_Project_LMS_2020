@@ -1,12 +1,15 @@
-from LMS import db
+import datetime as dt
+
 from flask_login import UserMixin
-from LMS import login
-from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
+
+from LMS import db
+from LMS import login
 from LMS.models import *
-import datetime as dt
 
 engine = create_engine(
     "postgresql://postgres:@192.168.99.100:54320/postgres", echo=True
