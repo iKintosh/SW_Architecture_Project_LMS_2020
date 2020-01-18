@@ -1,5 +1,7 @@
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
+
 from LMS import db
-from werkzeug.security import generate_password_hash, check_password_hash
 
 PHONE_LENGTH = 12
 
@@ -39,10 +41,10 @@ class User(db.Model):
 
     @phone.setter
     def phone(self, value):
-        if value[:2] == '+7' and len(value) == PHONE_LENGTH:
+        if value[:2] == "+7" and len(value) == PHONE_LENGTH:
             self.__phone = value
         else:
-            raise ValueError('Phone format is wrong. Use +7... format')
+            raise ValueError("Phone format is wrong. Use +7... format")
 
     city = db.Column(db.String)
     about_me = db.Column(db.String)
@@ -55,10 +57,11 @@ class User(db.Model):
 
     @vk_link.setter
     def vk_link(self, value):
-        if value.startswith('https://vk.com/'):
+        if value.startswith("https://vk.com/"):
             self.__vk_link = value
         else:
-            raise ValueError('Link format is wrong. Use https://vk.com/ format')
+            raise ValueError(
+                "Link format is wrong. Use https://vk.com/ format")
 
     __facebook_link = db.Column(db.String)
 
@@ -68,10 +71,11 @@ class User(db.Model):
 
     @facebook_link.setter
     def facebook_link(self, value):
-        if value.startswith('https://facebook.com/'):
+        if value.startswith("https://facebook.com/"):
             self.__facebook_link = value
         else:
-            raise ValueError('Link format is wrong. Use https://facebook.com/ format')
+            raise ValueError(
+                "Link format is wrong. Use https://facebook.com/ format")
 
     __linkedin_link = db.Column(db.String)
 
@@ -81,10 +85,11 @@ class User(db.Model):
 
     @linkedin_link.setter
     def linkedin_link(self, value):
-        if value.startswith('https://linkedin.com/'):
+        if value.startswith("https://linkedin.com/"):
             self.__linkedin_link = value
         else:
-            raise ValueError('Link format is wrong. Use https://linkedin.com/ format')
+            raise ValueError(
+                "Link format is wrong. Use https://linkedin.com/ format")
 
     __instagram_link = db.Column(db.String)
 
@@ -94,39 +99,46 @@ class User(db.Model):
 
     @instagram_link.setter
     def instagram_link(self, value):
-        if value.startswith('https://www.instagram.com/'):
+        if value.startswith("https://www.instagram.com/"):
             self.__instagram_link = value
         else:
-            raise ValueError('Link format is wrong. Use https://www.instagram.com/ format')
+            raise ValueError(
+                "Link format is wrong. Use https://www.instagram.com/ format")
 
     def __repr__(self):
-        return f"<User(name={self.name}, family_name={self.family_name}," \
-               f"email={self.email}, phone={self.phone})>"
+        return (f"<User(name={self.name}, family_name={self.family_name},"
+                f"email={self.email}, phone={self.phone})>")
 
 
 class Group(db.Model):
     num = db.Column(db.Integer, primary_key=True)
     degree = db.Column(db.String, nullable=False)
     grade = db.Column(db.Integer, nullable=False)
-    students = db.relationship('Student', backref='group', lazy='dynamic')
+    students = db.relationship("Student", backref="group", lazy="dynamic")
 
     def __repr__(self):
         return f"<Group(num={self.num}, degree={self.degree}, grade={self.grade})>"
 
 
 class Tutor(db.Model):
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    course_id = db.Column(db.Integer,
+                          db.ForeignKey("course.id"),
+                          primary_key=True)
 
 
 class Moderator(db.Model):
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    course_id = db.Column(db.Integer,
+                          db.ForeignKey("course.id"),
+                          primary_key=True)
 
 
 class Student(db.Model):
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    group_num = db.Column(db.Integer, db.ForeignKey('group.num'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    group_num = db.Column(db.Integer,
+                          db.ForeignKey("group.num"),
+                          primary_key=True)
     entry_year = db.Column(db.Integer, nullable=False)
     is_pay = db.Column(db.Boolean)
 
@@ -135,18 +147,22 @@ class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
-    tutors = db.relationship('Tutor', backref='course', lazy='dynamic')
-    moderators = db.relationship('Moderator', backref='course', lazy='dynamic')
-    materials = db.relationship('Material', backref='course', lazy='dynamic')
-    homeworks = db.relationship('Homework', backref='course', lazy='dynamic')
+    tutors = db.relationship("Tutor", backref="course", lazy="dynamic")
+    moderators = db.relationship("Moderator", backref="course", lazy="dynamic")
+    materials = db.relationship("Material", backref="course", lazy="dynamic")
+    homeworks = db.relationship("Homework", backref="course", lazy="dynamic")
 
     def __repr__(self):
         return f"<Course(name={self.name}, description={self.description})>"
 
 
 class Curriculum(db.Model):
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), primary_key=True)
-    group_num = db.Column(db.Integer, db.ForeignKey('group.num'), primary_key=True)
+    course_id = db.Column(db.Integer,
+                          db.ForeignKey("course.id"),
+                          primary_key=True)
+    group_num = db.Column(db.Integer,
+                          db.ForeignKey("group.num"),
+                          primary_key=True)
 
 
 class Material(db.Model):
@@ -154,11 +170,14 @@ class Material(db.Model):
     name = db.Column(db.String)
     text = db.Column(db.String)
     date = db.Column(db.DateTime)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    course_id = db.Column(db.Integer, db.ForeignKey("course.id"))
 
     def __repr__(self):
         return "<Material(name='%s', name='%s', 'text'='%s')>" % (
-            self.name, self.name, self.text)
+            self.name,
+            self.name,
+            self.text,
+        )
 
 
 class Homework(db.Model):
@@ -167,18 +186,19 @@ class Homework(db.Model):
     valid_from = db.Column(db.DateTime)
     valid_to = db.Column(db.DateTime)
     description = db.Column(db.String)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
-    answers = db.relationship('Answer', backref='homework', lazy='dynamic')
+    course_id = db.Column(db.Integer, db.ForeignKey("course.id"))
+    answers = db.relationship("Answer", backref="homework", lazy="dynamic")
 
     def __repr__(self):
-        return f"<Homework(name={self.name}, valid_from={self.valid_from}, valid_to={self.valid_to}," \
-               f"description={self.description}, course_id={self.course_id})>"
+        return (
+            f"<Homework(name={self.name}, valid_from={self.valid_from}, valid_to={self.valid_to},"
+            f"description={self.description}, course_id={self.course_id})>")
 
 
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    homework_id = db.Column(db.Integer, db.ForeignKey('homework.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    homework_id = db.Column(db.Integer, db.ForeignKey("homework.id"))
     answer = db.Column(db.String)
     submit_date = db.Column(db.DateTime)
 
