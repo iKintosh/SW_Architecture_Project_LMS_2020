@@ -1,3 +1,5 @@
+import os
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -7,7 +9,9 @@ from LMS.model.models import Student
 from LMS.model.models import Tutor
 from LMS.model.models import User
 
-engine = create_engine("postgresql://postgres:@192.168.99.100:54320/postgres",
+db_url = os.getenv('DATABASE_URL')
+
+engine = create_engine(db_url,
                        echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()

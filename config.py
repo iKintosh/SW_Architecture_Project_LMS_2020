@@ -1,4 +1,5 @@
 import os
+
 from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
@@ -10,3 +11,10 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     RESTPLUS_MASK_SWAGGER = False
+
+
+import multiprocessing
+
+workers = multiprocessing.cpu_count() * 2 + 1
+threads = 2 * multiprocessing.cpu_count()
+bind = "0.0.0.0:5000"
