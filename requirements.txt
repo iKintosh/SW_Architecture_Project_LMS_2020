@@ -59,3 +59,5 @@ widgetsnbextension==3.5.1
 wincertstore==0.2
 WTForms==2.2.1
 zipp==0.6.0
+flask-jwt-extended==3.24.1
+flask_restplus==0.13.0

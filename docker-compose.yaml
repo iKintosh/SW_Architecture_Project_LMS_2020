@@ -1,12 +1,21 @@
-version: "3.7"
+version: "3.3"
 services:
-
+  lms:
+    build: .
+    environment:
+      FLASK_DEBUG: 0
+      FLASK_APP: 'run.py'
+    links:
+      - db
+    ports:
+      - "5000:5000"
   db:
     image: postgres:11
+    environment:
+      POSTGRES_USER: superuser
+      POSTGRES_PASSWORD: password
     volumes:
       - db-data:/var/lib/postgresql/data
-    ports:
-      - 54320:5432
 
 volumes:
   db-data:
