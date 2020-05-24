@@ -1,8 +1,9 @@
 import os
-
+import multiprocessing
 from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -12,8 +13,6 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     RESTPLUS_MASK_SWAGGER = False
 
-
-import multiprocessing
 
 workers = multiprocessing.cpu_count() * 2 + 1
 threads = 2 * multiprocessing.cpu_count()

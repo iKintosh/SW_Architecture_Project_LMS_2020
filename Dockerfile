@@ -13,7 +13,6 @@ RUN pip install -r requirements.txt
 ENV DATABASE_URL postgresql://superuser:password@db/postgres
 ENV FLASK_DEBUG 0
 ENV FLASK_APP "run.py"
-ENV JWT_SECRET_KEY "you-will-never-guess"
 ENV PYTHONPATH ./
 
 RUN chmod +x run.py
