@@ -32,7 +32,23 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc18da90-d561-490b-8ca6-27b3f8471611" name="Default Changelist" comment="" />
+    <list default="true" id="bc18da90-d561-490b-8ca6-27b3f8471611" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/kubernetes/gke/gcp-ingress.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kubernetes/gke/postgres-deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kubernetes/gke/postgres-service.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kubernetes/local/api-deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kubernetes/local/api-service.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kubernetes/local/postgres-deployment.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kubernetes/local/postgres-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LMS/test/db_filling.py" beforeDir="false" afterPath="$PROJECT_DIR$/LMS/test/db_filling.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kubernetes/api-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/kubernetes/gke/api-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kubernetes/api-service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/kubernetes/gke/api-service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kubernetes/ingress.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/kubernetes/local/ingress.yaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,6 +64,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1cLwNyX3ndX9KKAo2DqFZS0e3kR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -56,7 +73,17 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/kubernetes/gke" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/kubernetes/gke" />
+      <recent name="$PROJECT_DIR$/kubernetes/local" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/kubernetes/local" />
+      <recent name="$PROJECT_DIR$/kubernetes/gke" />
+    </key>
   </component>
   <component name="RunManager" selected="Docker.lms">
     <configuration name="docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
@@ -72,7 +99,6 @@
         <settings>
           <option name="imageTag" value="lms:1.0" />
           <option name="buildCliOptions" value="" />
-          <option name="buildOnly" value="true" />
           <option name="command" value="" />
           <option name="containerName" value="" />
           <option name="entrypoint" value="" />
@@ -100,7 +126,8 @@
       <option name="presentableId" value="Default" />
       <updated>1590321145435</updated>
       <workItem from="1590321146677" duration="22981000" />
-      <workItem from="1590406192498" duration="24861000" />
+      <workItem from="1590406192498" duration="24978000" />
+      <workItem from="1590437981735" duration="5878000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add compose, fix imports">
       <created>1590326822366</created>
@@ -152,10 +179,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="655" y="88" width="666" height="929" key="#Dockerfile/67.27.1853.1053@67.27.1853.1053" timestamp="1590323705570" />
-    <state x="675" y="354" width="626" height="396" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590351341092">
+    <state x="675" y="354" width="626" height="396" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590438448084">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="675" y="354" width="626" height="396" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1590351341092" />
+    <state x="675" y="354" width="626" height="396" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1853.1053@67.27.1853.1053" timestamp="1590438448084" />
     <state x="655" y="88" width="666" height="929" key="#lms" timestamp="1590351731179">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -164,6 +191,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="167" y="124" width="1653" height="855" key="DiffContextDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1590413257430" />
+    <state x="765" y="296" width="447" height="513" key="FileChooserDialogImpl" timestamp="1590437579583">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="765" y="296" width="447" height="513" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1590437579583" />
     <state x="588" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1590360129041">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lms
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      name: lms
+  template:
+    metadata:
+      labels:
+        name: lms
+    spec:
+      containers:
+        - name: lms
+          image: gcr.io/reflected-jet-278314/lms:1.3
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              memory: 256Mi
+            limits:
+              memory: 512Mi

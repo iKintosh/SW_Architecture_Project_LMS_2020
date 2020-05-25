@@ -11,8 +11,7 @@ from LMS.model.models import User
 
 db_url = os.getenv('DATABASE_URL')
 
-engine = create_engine(db_url,
-                       echo=True)
+engine = create_engine(db_url, echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 

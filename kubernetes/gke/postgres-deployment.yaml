@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgres
+  template:
+    metadata:
+      labels:
+        name: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:11
+        env:
+        - name: POSTGRES_DB
+          value: postgres
+        - name: POSTGRES_USER
+          value: superuser
+        - name: POSTGRES_PASSWORD
+          value: password
+        ports:
+          - containerPort: 5432
+            name: postgres
+        resources:
+          requests:
+            memory: 256Mi
+          limits:
+            memory: 512Mi
