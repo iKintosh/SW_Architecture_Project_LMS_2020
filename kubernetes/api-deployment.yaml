@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lms
-  labels:
-    name: lms
 spec:
   replicas: 4
   selector:
@@ -11,14 +9,12 @@ spec:
       name: lms
   template:
     metadata:
-      name: lms
       labels:
         name: lms
     spec:
       containers:
         - name: lms
-          image: lms:1.0
-          imagePullPolicy: Never
+          image: gcr.io/reflected-jet-278314/lms:1.2
           ports:
             - containerPort: 5000
           resources:

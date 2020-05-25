@@ -10,7 +10,6 @@ COPY config.py .
 RUN apt-get update && apt-get install -y gcc python3-dev apt-utils
 RUN pip install -r requirements.txt
 
-ENV DATABASE_URL postgresql://superuser:password@db/postgres
 ENV FLASK_DEBUG 0
 ENV FLASK_APP "run.py"
 ENV PYTHONPATH ./
